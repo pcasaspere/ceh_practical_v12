@@ -670,11 +670,17 @@ rpcclient -U username%password IP
 
 - [msf] > `use auxiliary/scanner/smb/smb_login`
 - List the shared resources of an SMB server:
-	`smbclient -L \\\\\\\\IP`
-	`smbclient -L \\\\\\\\IP -U username`
+```bash
+smbclient -L \\IP
+smbclient -L \\\\\\\\IP`
+smbclient -L \\\\\\\\IP -U username
+```
 - Access to the shared resources of an SMB server:
-	`smbclient \\\\\\\\IP\\directory`
-	`smbclient \\\\\\\\IP\\directory -U username`
+```bash
+smbclient \\\\\\\\IP\\directory
+smbclient \\\\\\\\IP\\directory -U username
+smbclient \\\\IP\\directory -U user%password123
+```
 - Interesting commands:
 	`get file`
 	`mget *`
@@ -826,7 +832,9 @@ sudo ./Responder.py -I interface
 john hashes.txt
 john --wordlist=/usr/--- hashes
 john hashes --show
-john --format=hash_type --wordlist=/usr/[...] hashes`
+john --format=hash_type --wordlist=/usr/[...] hashes
+john --format=Raw-MD5 --wordlist=/usr/[...] hashes #example with md5
+```
 
 - Hash identifier:
 ```bash
@@ -896,6 +904,19 @@ powershell -ExecutionPolicy Bypass -Command ". .\\PowerUp.ps1;Invoke-AllChecks"
 
 
 ##   Escalate Privileges
+- gtfobins: is a curated list of Unix binaries that can be used to bypass local security restrictions in misconfigured systems. (https://gtfobins.github.io/)[https://gtfobins.github.io/]
+
+
+- sudo
+```bash
+sudo -i
+```
+
+- find scret files
+```bash
+find /myfoder -name "secret.txt" -o -name "*.png"
+find /myfolder -type {f/d} -name myfile.txt
+```
 
 - getsystem
 ```bash
@@ -942,6 +963,9 @@ meterpreter> shell
 - Search files
 ```bash
     meterpreter> search -f file
+    
+    find /myfoder -name "secret.txt" -o -name "*.png"
+    find /myfolder -type {f/d} -name myfile.txt
 ```
 
 - Show state firewall
@@ -986,15 +1010,28 @@ mklink backdoor.exe readme.txt:calc.exe
 ##   Hide Data - Steganography
 
 - Snow
-```bash
 # Hide data
+```bash
 snow.exe -C -m "text" -p "password" text1.txt text2.txt
 	- 'password' is the password. The data text is hidden inside the text2.txt
 	- the file text2.txt has become a combination of text1.txt and text
+```
  
-# Extract data
+# Extract data on files
+## Windows
+```bash
 snow.exe -C -p "password" text2.txt
 	- It shows the context of text1.txt
+```
+
+## Linux
+```bash
+stegsnow -p password -C restricted.txt output.txt
+```
+
+# Extract data from image file
+- Upload file to [CRC Online Tool](https://emn178.github.io/online-tools/crc/) and extract data
+
 
 - Covert_tcp (bypass firewalls and send data)
 ```bash
@@ -1022,10 +1059,10 @@ machine 1:
 # Reveals if a file contains hidden data.
 steghide info file 
 
-# Extracts the hidden data, password optional.
+# Extracts the hidden data in [image] files, password optional.
 steghide extract -sf file [--passphrase password] 
 
-# Attempt password cracking on Steghide
+# Attempt password cracking on Steghide 
 stegcracker <file> [<wordlist>]
 ```
 
@@ -1568,8 +1605,14 @@ wpscan --url http://IP --password wordlistPass --usernames wordlistUsers
 
 ### Exploits
 - Drupalgeddon: https://www.exploit-db.com/exploits/34992
-`python2.7 drupalgeddon.py -t http://domain.local -u <user> -p <password>`
-or `[msf]> exploit/multi/http/drupal_drupageddon`
+```bash
+python2.7 drupalgeddon.py -t http://domain.local -u <user> -p <password>
+
+or
+[msf]> exploit/multi/http/drupal_drupageddon
+or
+[msf]> exploit/unix/webapp/drupal_drupalgeddon2
+```
 
 - Drupalgeddon2: https://www.exploit-db.com/exploits/44448
 - Drupalgeddon3: https://github.com/rithchard/Drupalgeddon3 or Metasploit with multi/http/drupal_drupageddon3
@@ -1670,6 +1713,8 @@ sqlmap -u "domain/page.php?parameter=1" -D database --tables
 sqlmap -u "domain/page.php?parameter=1" -D database -T table --dump
 sqlmap -u "domain/page.php?parameter=1" -D database -T table --os-shell
 sqlmap -u "domain/page.php?parameter=1" --cookie="cookie" --dbs
+sqlmap -u "domain/page.php?parameter=1" --crawl=3 --dbs
+sqlmap -u "domain/page.php?parameter=1" --dbs --level=5 --risk=3
 ```
 
 - DSSS
@@ -1701,16 +1746,16 @@ airmon-ng start wlan0mon
 
 ## Crack a WEP Network
 - aircrack-ng
-```bash
+
 - Puts the wireless interface into monitor mode: `airmon-ng start wlan0mon`
 - List a detected access points and connected clients (stations):  `airodump-ng wlan0mon`
 - List of connected clients (stations): `airodump-ng --bssid MACAddress wlan0mon`
 - Generate de-authentication packets: `aireplay-ng -0 11 -a MAC-AP -c MAC-dest wlan0mon`
-```
 
 - Crack a PCAP file
 ```bash
 aircrack-ng file.pcap
+aircrack-ng -w /usr/share/seclist/[...] file.pcap
 ```
 
 - Wifiphisher
@@ -1938,3 +1983,27 @@ RC2, Triple DES...
     DES crypto
     enter the pass phrase and select the file
 ```
+
+## Parrot OS utils
+To change the terminal locale in Parrot OS to Spanish, you can follow these steps:
+
+1. Open the terminal.
+2. Edit the locale configuration file with the following command:
+   ```bash
+   sudo nano /etc/default/locale
+   ```
+3. Change or add the following lines to set the locale to Spanish:
+   ```
+   LANG="es_ES.UTF-8"
+   LANGUAGE="es_ES:es"
+   LC_ALL="es_ES.UTF-8"
+   ```
+4. Save and close the file (in nano, you can do this by pressing `CTRL+O`, then `ENTER` to save and `CTRL+X` to exit).
+5. Generate the Spanish locale if it is not available:
+   ```bash
+   sudo locale-gen es_ES.UTF-8
+   ```
+6. Apply the changes by restarting the terminal or running:
+   ```bash
+   source /etc/default/locale
+   ```
