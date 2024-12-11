@@ -1989,26 +1989,53 @@ RC2, Triple DES...
     enter the pass phrase and select the file
 ```
 
-## Parrot OS utils
-To change the terminal locale in Parrot OS to Spanish, you can follow these steps:
+## Parrot OS utils### How to Install and Set Spanish Locale in Parrot OS
+### Step 1: Open the Terminal
+Launch the terminal application on your Parrot OS.
 
-1. Open the terminal.
-2. Edit the locale configuration file with the following command:
-   ```bash
-   sudo nano /etc/default/locale
-   ```
-3. Change or add the following lines to set the locale to Spanish:
-   ```
-   LANG="es_ES.UTF-8"
-   LANGUAGE="es_ES:es"
-   LC_ALL="es_ES.UTF-8"
-   ```
-4. Save and close the file (in nano, you can do this by pressing `CTRL+O`, then `ENTER` to save and `CTRL+X` to exit).
-5. Generate the Spanish locale if it is not available:
-   ```bash
-   sudo locale-gen es_ES.UTF-8
-   ```
-6. Apply the changes by restarting the terminal or running:
-   ```bash
-   source /etc/default/locale
-   ```
+### Step 2: Check Available Locales
+Before proceeding, check the available locales on your system by running the following command:
+
+```bash
+locale -a
+```
+
+Look for "es_ES.UTF-8" in the list. If it is not present, proceed to the next step.
+
+### Step 3: Edit Locale Configuration
+You need to edit the locale configuration file. Run the following command:
+
+```bash
+sudo nano /etc/default/locale
+```
+
+### Step 4: Add or Modify Locale Settings
+In the nano editor, add or modify the following lines to set the locale to Spanish:
+
+```plaintext
+LANG="es_ES.UTF-8"
+LANGUAGE="es_ES:es"
+LC_ALL="es_ES.UTF-8"
+```
+
+### Step 5: Save and Exit
+To save the changes in nano, press `CTRL + O`, then `ENTER` to confirm. After that, press `CTRL + X` to exit the editor.
+
+### Step 6: Generate Spanish Locale
+Now, generate the Spanish locale by running the following command:
+
+```bash
+sudo locale-gen es_ES.UTF-8
+```
+
+This command will create the locale if it is not already installed.
+
+### Step 7: Apply Changes
+To apply the changes, either restart your terminal or run:
+
+```bash
+source /etc/default/locale
+```
+
+### Step 8: Verify Locale Installation
+Finally, run the `locale -a` command again to verify that "es_ES.UTF-8" is now listed among the available locales.
