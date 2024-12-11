@@ -1018,13 +1018,13 @@ snow.exe -C -m "text" -p "password" text1.txt text2.txt
 ```
  
 # Extract data on files
-## Windows
+- snow: Steganographic Nature Of Whitespace (SNOW) 
 ```bash
 snow.exe -C -p "password" text2.txt
 	- It shows the context of text1.txt
 ```
 
-## Linux
+- stegsnow: Whitespace steganography program
 ```bash
 stegsnow -p password -C restricted.txt output.txt
 ```
@@ -1181,10 +1181,10 @@ cmd> net user test /active:yes
 - PEiD.exe
 
 
-##   Analyze ELF Executable File
-
+##   Analyze ELF Executable File (for example malware executable file)
 - Detect It Easy (die.exe)
 
+nota: Sometimes if file is type ELF is so useful to switch to "ELF TAB"
 
 ##   Information of a Malware Executable File
 
@@ -1767,11 +1767,13 @@ network manage connect
 
 - Airodump
 ```bash
+airodump-ng {file}.cap
 airodump-ng wlan0mon --encrypt wep
 airodump-ng --dssid SSID -c channel -w Wepcrack wlan0mon
 aireplay-ng -0 11 -a MAC-AP -c MAC-dest wlan0mon
 aircrack-ng file.cap
-aircrack-ng -a2 Handshake -w pathWordlist file.cap
+aircrack-ng -w /usr/share/seclist/[...] file.cap
+aircrack-ng -a2 Handshake -w /usr/share/seclist/[...]
 ```
 
 ## Crack a WPA Network
@@ -1871,6 +1873,9 @@ adb -s 127.0.0.1:5555 shell
 > Get a shell
 - `adb shell`
 
+> Find secret file
+- `find /sdcard/ -name "secret.txt" -o -name "another_secret.txt"`
+
 > Download a file
 - `adb pull /sdcard/demo.mp4 ./`
 
@@ -1887,7 +1892,7 @@ adb -s 127.0.0.1:5555 shell
 
 ##   Sniffing Traffic
 >  Wireshark
-- mqtt (Protocol Standard for IoT Messaging)
+- mqtt (Protocol Standard for IoT Messaging - msgtype)
 - bevywise IoT simulator - Windows 
 - runsimulator.bat
 
