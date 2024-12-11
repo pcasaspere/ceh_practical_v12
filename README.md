@@ -1147,12 +1147,11 @@ cmd> net user test /active:yes
 
 
 ##   Gain Control over a Victim Machine
-
 -  njRAT Trojan (Remote Access Trojans) -> Windows
     * builder
     * Create trojan with reverse shell and send it to the victim machine and execute it
     * When a session is opened, click on it and pulse in "manager" option or "remote desktop", "remote cam", and more.
-
+- Thief RAT
 
 ##   Hide a Trojan and make it undetectable
 
