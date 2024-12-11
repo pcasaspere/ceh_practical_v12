@@ -1989,7 +1989,7 @@ RC2, Triple DES...
     enter the pass phrase and select the file
 ```
 
-## Parrot OS utils### How to Install and Set Spanish Locale in Parrot OS
+## Parrot OS utils
 ### Step 1: Open the Terminal
 Launch the terminal application on your Parrot OS.
 
