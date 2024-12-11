@@ -632,9 +632,9 @@ ls -d nameServer
 
 
 ##  SMTP Enumeration
-
+Massive enumaration on network
 ```bash
-nmap -p 25,110,143 --script=smtp-enum-users IP \
+nmap -p 25,110,143 --open --script=smtp-enum-users IP \
     --script=smtp-enum-users \
     --script=smtp-open-relay \
     --script=smtp-commands xxx.xxx.xxx.xxx/xx
