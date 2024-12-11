@@ -634,7 +634,7 @@ ls -d nameServer
 ##  SMTP Enumeration
 
 ```bash
-nmap -p 25 --script=smtp-enum-users IP \
+nmap -p 25,110,143 --script=smtp-enum-users IP \
     --script=smtp-enum-users \
     --script=smtp-open-relay \
     --script=smtp-commands xxx.xxx.xxx.xxx/xx
